@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<carTable>
+    <cars>
+        <created>2019-04-27T20:07:26.261+03:00</created>
+        <id>2</id>
+        <modelId>3</modelId>
+        <updated>2019-04-29T19:15:21.323+03:00</updated>
+        <vin>555666</vin>
+    </cars>
+    <cars>
+        <created>2019-04-27T20:12:31.741+03:00</created>
+        <id>3</id>
+        <modelId>4</modelId>
+        <updated>2019-04-28T17:33:28.351+03:00</updated>
+        <vin>122111DFE</vin>
+    </cars>
+    <cars>
+        <created>2019-04-27T20:15:10.600+03:00</created>
+        <id>4</id>
+        <modelId>7</modelId>
+        <updated>2019-04-28T17:34:01.067+03:00</updated>
+        <vin>344334GHHI</vin>
+    </cars>
+    <cars>
+        <created>2019-05-08T21:54:08.389+03:00</created>
+        <id>6</id>
+        <modelId>12</modelId>
+        <updated>2019-05-08T21:54:08.389+03:00</updated>
+        <vin>GH6545</vin>
+    </cars>
+    <nextId>6</nextId>
+</carTable>

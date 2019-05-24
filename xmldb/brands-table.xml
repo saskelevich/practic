@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<brandTable>
+    <brands>
+        <created>2019-04-27T18:29:12.252+03:00</created>
+        <id>2</id>
+        <name>VW</name>
+        <updated>2019-04-28T17:19:48.766+03:00</updated>
+    </brands>
+    <brands>
+        <created>2019-04-27T23:19:11.810+03:00</created>
+        <id>3</id>
+        <name>Reno</name>
+        <updated>2019-04-28T17:21:22.396+03:00</updated>
+    </brands>
+    <brands>
+        <created>2019-04-27T23:19:20.372+03:00</created>
+        <id>4</id>
+        <name>Ford</name>
+        <updated>2019-04-28T17:24:02.395+03:00</updated>
+    </brands>
+    <brands>
+        <created>2019-05-08T21:50:38.649+03:00</created>
+        <id>8</id>
+        <name>Audi</name>
+        <updated>2019-05-08T21:51:32.368+03:00</updated>
+    </brands>
+    <nextId>8</nextId>
+</brandTable>
