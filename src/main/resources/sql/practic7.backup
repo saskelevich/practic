@@ -1,0 +1,422 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.8 (Ubuntu 10.8-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.8 (Ubuntu 10.8-0ubuntu0.18.04.1)
+
+-- Started on 2019-05-24 16:38:32 EEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 1 (class 3079 OID 13043)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2959 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 196 (class 1259 OID 16449)
+-- Name: brands; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.brands (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    created timestamp without time zone DEFAULT now() NOT NULL,
+    updated timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 197 (class 1259 OID 16452)
+-- Name: brands_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.brands_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2960 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: brands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.brands_id_seq OWNED BY public.brands.id;
+
+
+--
+-- TOC entry 200 (class 1259 OID 16485)
+-- Name: cars; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cars (
+    id integer NOT NULL,
+    vin character varying(50),
+    updated timestamp without time zone DEFAULT now() NOT NULL,
+    created timestamp without time zone DEFAULT now() NOT NULL,
+    model_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 201 (class 1259 OID 16488)
+-- Name: cars_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.cars_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2961 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.cars_id_seq OWNED BY public.cars.id;
+
+
+--
+-- TOC entry 198 (class 1259 OID 16468)
+-- Name: models; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.models (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    created timestamp without time zone DEFAULT now() NOT NULL,
+    updated timestamp without time zone DEFAULT now() NOT NULL,
+    brand_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 199 (class 1259 OID 16471)
+-- Name: models_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.models_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- TOC entry 2962 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: models_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.models_id_seq OWNED BY public.models.id;
+
+
+--
+-- TOC entry 2800 (class 2604 OID 16454)
+-- Name: brands id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brands ALTER COLUMN id SET DEFAULT nextval('public.brands_id_seq'::regclass);
+
+
+--
+-- TOC entry 2806 (class 2604 OID 16490)
+-- Name: cars id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cars ALTER COLUMN id SET DEFAULT nextval('public.cars_id_seq'::regclass);
+
+
+--
+-- TOC entry 2803 (class 2604 OID 16473)
+-- Name: models id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.models ALTER COLUMN id SET DEFAULT nextval('public.models_id_seq'::regclass);
+
+
+--
+-- TOC entry 2946 (class 0 OID 16449)
+-- Dependencies: 196
+-- Data for Name: brands; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.brands (id, name, created, updated) VALUES (1, 'vw', '2019-05-20 18:55:48.853375', '2019-05-20 18:55:48.853375');
+INSERT INTO public.brands (id, name, created, updated) VALUES (2, 'ford', '2019-05-20 18:55:57.732423', '2019-05-20 18:55:57.732423');
+INSERT INTO public.brands (id, name, created, updated) VALUES (3, 'opel', '2019-05-20 18:56:03.521241', '2019-05-20 18:56:03.521241');
+INSERT INTO public.brands (id, name, created, updated) VALUES (4, 'audi', '2019-05-20 19:06:04.777356', '2019-05-20 19:06:04.777356');
+INSERT INTO public.brands (id, name, created, updated) VALUES (20, 'jeep', '2019-05-24 02:52:20.768463', '2019-05-24 02:52:58.916');
+INSERT INTO public.brands (id, name, created, updated) VALUES (21, 'volvo', '2019-05-24 02:53:18.78861', '2019-05-24 02:53:18.78861');
+INSERT INTO public.brands (id, name, created, updated) VALUES (22, 'renault', '2019-05-24 02:53:27.137746', '2019-05-24 02:53:27.137746');
+INSERT INTO public.brands (id, name, created, updated) VALUES (23, 'fiat', '2019-05-24 02:53:36.240613', '2019-05-24 02:53:36.240613');
+INSERT INTO public.brands (id, name, created, updated) VALUES (25, 'pego', '2019-05-24 02:53:57.077832', '2019-05-24 02:53:57.077832');
+INSERT INTO public.brands (id, name, created, updated) VALUES (26, 'dodge', '2019-05-24 02:54:14.980685', '2019-05-24 02:54:14.980685');
+INSERT INTO public.brands (id, name, created, updated) VALUES (27, 'bmw', '2019-05-24 02:54:21.124647', '2019-05-24 02:54:21.124647');
+INSERT INTO public.brands (id, name, created, updated) VALUES (28, 'kia', '2019-05-24 02:54:45.877927', '2019-05-24 02:54:45.877927');
+INSERT INTO public.brands (id, name, created, updated) VALUES (29, 'geely', '2019-05-24 02:54:52.844898', '2019-05-24 02:54:52.844898');
+INSERT INTO public.brands (id, name, created, updated) VALUES (30, 'hummer', '2019-05-24 02:55:47.341698', '2019-05-24 02:55:47.341698');
+INSERT INTO public.brands (id, name, created, updated) VALUES (31, 'mitsubishi', '2019-05-24 02:56:05.91348', '2019-05-24 02:56:05.91348');
+
+
+--
+-- TOC entry 2950 (class 0 OID 16485)
+-- Dependencies: 200
+-- Data for Name: cars; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (1, 'HGDT65487H', '2019-05-20 20:28:15.571', '2019-05-20 20:26:49.980032', 2);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (11, 'GTF545SDN', '2019-05-24 00:20:25.393117', '2019-05-24 00:20:25.393117', 3);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (12, 'NCST65487H', '2019-05-24 03:18:25.523724', '2019-05-24 03:18:25.523724', 2);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (13, 'JHGR21566H', '2019-05-24 03:18:41.128389', '2019-05-24 03:18:41.128389', 3);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (14, 'KJUYYTG8776', '2019-05-24 03:19:06.12679', '2019-05-24 03:19:06.12679', 10);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (15, 'KNBYH6543F', '2019-05-24 03:19:17.645086', '2019-05-24 03:19:17.645086', 10);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (16, 'JIHN76490', '2019-05-24 03:19:47.06556', '2019-05-24 03:19:47.06556', 11);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (17, '215KLJHBV', '2019-05-24 03:19:56.792182', '2019-05-24 03:19:56.792182', 11);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (18, 'PLLJNH7654', '2019-05-24 03:20:06.875099', '2019-05-24 03:20:06.875099', 12);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (19, '54MMHHYC555', '2019-05-24 03:21:06.558898', '2019-05-24 03:21:06.558898', 12);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (20, 'SD658E42D', '2019-05-24 03:21:16.870346', '2019-05-24 03:21:16.870346', 13);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (21, 'WE87756EHG', '2019-05-24 03:21:25.911698', '2019-05-24 03:21:25.911698', 14);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (22, 'SDE2V7634', '2019-05-24 03:21:37.467588', '2019-05-24 03:21:37.467588', 13);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (23, 'IJMVKVN6548', '2019-05-24 03:21:47.444791', '2019-05-24 03:21:47.444791', 14);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (24, 'IUWERNM456', '2019-05-24 03:21:56.721298', '2019-05-24 03:21:56.721298', 15);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (25, 'WE874NVI4', '2019-05-24 03:22:08.8956', '2019-05-24 03:22:08.8956', 15);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (26, 'MNVJSDU83874', '2019-05-24 03:22:18.214453', '2019-05-24 03:22:18.214453', 16);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (27, 'JFIE34985MVR', '2019-05-24 03:22:32.330286', '2019-05-24 03:22:32.330286', 16);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (28, 'SDIUVN7364B3', '2019-05-24 03:22:42.477359', '2019-05-24 03:22:42.477359', 17);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (29, 'VHG6543GC', '2019-05-24 03:22:55.400965', '2019-05-24 03:22:55.400965', 17);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (30, 'YDBNEBF65448', '2019-05-24 03:23:32.271584', '2019-05-24 03:23:32.271584', 18);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (31, 'IJFN548VD', '2019-05-24 03:25:51.169056', '2019-05-24 03:25:51.169056', 18);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (32, 'IUDBV7345', '2019-05-24 03:26:00.125717', '2019-05-24 03:26:00.125717', 19);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (33, 'PDOFJR34576', '2019-05-24 03:26:08.840171', '2019-05-24 03:26:08.840171', 20);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (34, 'OIRTNBF', '2019-05-24 03:26:17.582197', '2019-05-24 03:26:17.582197', 19);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (35, 'SUVTRB624', '2019-05-24 03:26:26.274483', '2019-05-24 03:26:26.274483', 20);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (36, 'TERC83756', '2019-05-24 03:26:35.812491', '2019-05-24 03:26:35.812491', 21);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (37, 'OIDFE245', '2019-05-24 03:26:48.404197', '2019-05-24 03:26:48.404197', 21);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (38, '645KHBNMJ', '2019-05-24 03:27:07.769', '2019-05-24 03:27:01.593603', 22);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (39, 'HBCR4327', '2019-05-24 03:27:16.85904', '2019-05-24 03:27:16.85904', 22);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (40, 'IUBVD432', '2019-05-24 03:27:25.867667', '2019-05-24 03:27:25.867667', 23);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (41, 'TRECHKJ74', '2019-05-24 03:27:48.186233', '2019-05-24 03:27:48.186233', 23);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (42, 'POUN45781', '2019-05-24 03:28:02.326', '2019-05-24 03:27:57.674592', 24);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (43, 'OUGBC5442', '2019-05-24 03:28:10.523622', '2019-05-24 03:28:10.523622', 24);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (44, 'NBTFFDS366', '2019-05-24 03:28:20.348219', '2019-05-24 03:28:20.348219', 25);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (45, 'KJIY6FVU8', '2019-05-24 03:28:29.61086', '2019-05-24 03:28:29.61086', 25);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (46, 'OIH542GVT', '2019-05-24 03:28:42.982125', '2019-05-24 03:28:42.982125', 26);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (47, 'YTF4329', '2019-05-24 03:28:52.342829', '2019-05-24 03:28:52.342829', 26);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (48, 'UYHHV653', '2019-05-24 03:29:01.99306', '2019-05-24 03:29:01.99306', 27);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (49, 'UYGBFD4332', '2019-05-24 03:29:10.014188', '2019-05-24 03:29:10.014188', 27);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (50, 'JHUG6443C', '2019-05-24 03:29:24.523', '2019-05-24 03:29:19.347223', 28);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (51, 'BVTR43326', '2019-05-24 03:29:33.886185', '2019-05-24 03:29:33.886185', 28);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (52, 'HUHB7654', '2019-05-24 03:29:42.099052', '2019-05-24 03:29:42.099052', 29);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (53, 'ZXAW456', '2019-05-24 03:29:50.345474', '2019-05-24 03:29:50.345474', 29);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (54, 'PIUH554CG', '2019-05-24 03:30:03.557', '2019-05-24 03:29:58.380409', 30);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (55, 'JBHG5EE4', '2019-05-24 03:30:12.035589', '2019-05-24 03:30:12.035589', 30);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (56, 'UYVB5454', '2019-05-24 03:30:20.218761', '2019-05-24 03:30:20.218761', 31);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (57, 'YGVH6551', '2019-05-24 03:30:29.552772', '2019-05-24 03:30:29.552772', 31);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (62, 'DG54864BQ', '2019-05-24 03:35:39.26872', '2019-05-24 03:35:39.26872', 32);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (63, 'SVOIJ6564', '2019-05-24 03:35:48.262309', '2019-05-24 03:35:48.262309', 32);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (64, 'SD54786CS', '2019-05-24 03:35:57.853577', '2019-05-24 03:35:57.853577', 33);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (65, 'D6578WE', '2019-05-24 03:36:05.952291', '2019-05-24 03:36:05.952291', 34);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (66, 'SF656A7D', '2019-05-24 03:36:14.378534', '2019-05-24 03:36:14.378534', 35);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (67, 'SVIYV765S', '2019-05-24 03:36:23.265796', '2019-05-24 03:36:23.265796', 34);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (68, '65SD87F', '2019-05-24 03:36:30.910067', '2019-05-24 03:36:30.910067', 35);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (69, '65SD6ASF8', '2019-05-24 03:36:37.323946', '2019-05-24 03:36:37.323946', 36);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (70, '65AD98VAS', '2019-05-24 03:36:45.508498', '2019-05-24 03:36:45.508498', 36);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (71, '6AS5FASF6', '2019-05-24 03:36:53.614723', '2019-05-24 03:36:53.614723', 37);
+INSERT INTO public.cars (id, vin, updated, created, model_id) VALUES (72, 'AS6547ASS', '2019-05-24 03:37:08.216701', '2019-05-24 03:37:08.216701', 37);
+
+
+--
+-- TOC entry 2948 (class 0 OID 16468)
+-- Dependencies: 198
+-- Data for Name: models; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (2, 'passat', '2019-05-20 20:04:12.044804', '2019-05-20 20:04:12.044804', 1);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (3, 'golf', '2019-05-20 20:13:38.447', '2019-05-20 20:13:38.447', 1);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (10, 'mondeo', '2019-05-24 02:58:44.063258', '2019-05-24 02:58:44.063258', 2);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (11, 'mustang', '2019-05-24 02:58:57.677658', '2019-05-24 02:58:57.677658', 2);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (12, 'astra', '2019-05-24 02:59:35.546064', '2019-05-24 02:59:35.546064', 3);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (13, 'vectra', '2019-05-24 02:59:51.104726', '2019-05-24 02:59:51.104726', 3);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (14, 'a8', '2019-05-24 03:00:24.030252', '2019-05-24 03:00:24.030252', 4);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (15, 'tt', '2019-05-24 03:00:32.373721', '2019-05-24 03:00:32.373721', 4);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (17, 'patriot', '2019-05-24 03:01:34.239826', '2019-05-24 03:01:34.239826', 20);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (18, 'xc90', '2019-05-24 03:01:57.133353', '2019-05-24 03:01:57.133353', 21);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (19, 'v40', '2019-05-24 03:02:16.803588', '2019-05-24 03:02:16.803588', 21);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (20, 'logan', '2019-05-24 03:02:45.307512', '2019-05-24 03:02:45.307512', 22);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (21, 'megane', '2019-05-24 03:03:12.07688', '2019-05-24 03:03:12.07688', 22);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (22, 'punto', '2019-05-24 03:03:43.194714', '2019-05-24 03:03:43.194714', 23);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (23, 'ducato', '2019-05-24 03:04:03.013538', '2019-05-24 03:04:03.013538', 23);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (24, '407', '2019-05-24 03:05:07.028185', '2019-05-24 03:05:07.028185', 25);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (25, '301', '2019-05-24 03:05:34.814749', '2019-05-24 03:05:34.814749', 25);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (26, 'viper', '2019-05-24 03:06:12.789247', '2019-05-24 03:06:12.789247', 26);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (27, 'caravan', '2019-05-24 03:06:31.805996', '2019-05-24 03:06:31.805996', 26);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (28, 'x5', '2019-05-24 03:07:23.943231', '2019-05-24 03:07:23.943231', 27);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (29, 'x7', '2019-05-24 03:07:47.487929', '2019-05-24 03:07:47.487929', 27);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (30, 'rio', '2019-05-24 03:08:15.574874', '2019-05-24 03:08:15.574874', 28);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (35, 'h4', '2019-05-24 03:13:30.913062', '2019-05-24 03:13:30.913062', 30);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (36, 'lancer', '2019-05-24 03:14:08.29403', '2019-05-24 03:14:08.29403', 31);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (37, 'pajero', '2019-05-24 03:14:22.301825', '2019-05-24 03:14:22.301825', 31);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (16, 'cherokee', '2019-05-24 03:01:05.934727', '2019-05-24 03:15:27.682', 20);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (34, 'h1', '2019-05-24 03:13:18.37572', '2019-05-24 03:16:31.826', 30);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (32, 'atlas', '2019-05-24 03:09:16.690712', '2019-05-24 03:16:54.595', 29);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (33, 'otaka', '2019-05-24 03:09:33.944839', '2019-05-24 03:17:05.106', 29);
+INSERT INTO public.models (id, name, created, updated, brand_id) VALUES (31, 'soul', '2019-05-24 03:08:54.562723', '2019-05-24 03:17:27.834', 28);
+
+
+--
+-- TOC entry 2963 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.brands_id_seq', 31, true);
+
+
+--
+-- TOC entry 2964 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.cars_id_seq', 73, true);
+
+
+--
+-- TOC entry 2965 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.models_id_seq', 37, true);
+
+
+--
+-- TOC entry 2810 (class 2606 OID 16520)
+-- Name: brands brand_uniq_name; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brands
+    ADD CONSTRAINT brand_uniq_name UNIQUE (name);
+
+
+--
+-- TOC entry 2812 (class 2606 OID 16467)
+-- Name: brands brands_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.brands
+    ADD CONSTRAINT brands_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2819 (class 2606 OID 16512)
+-- Name: cars cars_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cars
+    ADD CONSTRAINT cars_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2821 (class 2606 OID 16570)
+-- Name: cars cars_uniq_vin; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cars
+    ADD CONSTRAINT cars_uniq_vin UNIQUE (vin);
+
+
+--
+-- TOC entry 2815 (class 2606 OID 16522)
+-- Name: models model_uniq_name_brand-id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT "model_uniq_name_brand-id" UNIQUE (name, brand_id);
+
+
+--
+-- TOC entry 2817 (class 2606 OID 16504)
+-- Name: models models_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT models_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2822 (class 1259 OID 16518)
+-- Name: fki_cars_model-id_fkey; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX "fki_cars_model-id_fkey" ON public.cars USING btree (model_id);
+
+
+--
+-- TOC entry 2813 (class 1259 OID 16510)
+-- Name: fki_models_brand-id_fkey; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX "fki_models_brand-id_fkey" ON public.models USING btree (brand_id);
+
+
+--
+-- TOC entry 2824 (class 2606 OID 16513)
+-- Name: cars cars_model-id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cars
+    ADD CONSTRAINT "cars_model-id_fkey" FOREIGN KEY (model_id) REFERENCES public.models(id);
+
+
+--
+-- TOC entry 2823 (class 2606 OID 16505)
+-- Name: models models_brand-id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.models
+    ADD CONSTRAINT "models_brand-id_fkey" FOREIGN KEY (brand_id) REFERENCES public.brands(id);
+
+
+-- Completed on 2019-05-24 16:38:32 EEST
+
+--
+-- PostgreSQL database dump complete
+--
+
