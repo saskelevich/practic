@@ -20,15 +20,15 @@
 
 	<%
 	    List<Brand> brands = new ArrayList<>();
-	    String name = null;
-	    name = request.getParameter("name");
-	    if (name != null) {
-	        brands.add(dao.findByName(name));
-	        request.setAttribute("brands", brands);
-	    } else {
-	        brands = dao.getAll();
-	        request.setAttribute("brands", brands);
-	    }
+		    String name = null;
+		    name = request.getParameter("name");
+		    if (name != null) {
+		        brands.add(dao.findByName(name));
+		        request.setAttribute("brands", brands);
+		    } else {
+		        brands = dao.getAll();
+		        request.setAttribute("brands", brands);
+		    }
 	%>
 
 	<table border="10px" bordercolor="#DDBE8D" bgcolor="#FFF"

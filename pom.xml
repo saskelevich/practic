@@ -10,11 +10,11 @@
   
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jetty9.version>9.2.15.v20160210</jetty9.version>
+		<servlets.version>3.1.0</servlets.version>
 		<jstl.version>1.2.1</jstl.version>
 		<tld.version>1.1.2</tld.version>
-		<servlets.version>3.1.0</servlets.version>
 		<jsp.version>2.3.1</jsp.version>
+		<jetty9.version>9.2.15.v20160210</jetty9.version>
 		<tiles.version>3.0.8</tiles.version>
 	</properties>
 
@@ -81,7 +81,6 @@
 			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
@@ -92,6 +91,7 @@
 			<artifactId>standard</artifactId>
 			<version>${tld.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjtools</artifactId>

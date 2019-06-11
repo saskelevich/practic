@@ -13,15 +13,15 @@ import by.practic.datalayer.db.BrandDBDaoImpl;
 import by.practic.datalayer.entity.Brand;
 
 public class WebBrand extends HttpServlet {
-
+    
     private static final String ERROR_PAGE = "/practic7/error.jsp?error=";
     private static final String BRANDS_JSP_PATH = "/practic7/update/brand/brands.jsp";
     private final IDao<Brand, Brand> dao = BrandDBDaoImpl.getInstance();
-
+    
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
-
+        
         final String brandName = req.getParameter("brand");
         if (brandName != null) {
             try {
@@ -35,7 +35,7 @@ public class WebBrand extends HttpServlet {
             Util.redirectToList(resp, BRANDS_JSP_PATH);
         }
     }
-
+    
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
